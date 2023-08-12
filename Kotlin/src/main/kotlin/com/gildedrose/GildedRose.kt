@@ -51,6 +51,20 @@ class GildedRose(var items: List<Item>) {
                     }
                 }
             }
+
+            ensureQualityIsNotBelowZero(items[i])
+            ensureQualityIsNotOverFifty(items[i])
+        }
+    }
+
+    private fun ensureQualityIsNotBelowZero(item: Item) {
+        require(item.quality >= 0) { "Item ${item.name} quality cannot be below 0" }
+    }
+
+    private fun ensureQualityIsNotOverFifty(item: Item) {
+        // Skip legendary items
+        if (!item.name.startsWith("Sulfuras")) {
+            require(item.quality <= 50) { "Item ${item.name} quality cannot be over 50" }
         }
     }
 
